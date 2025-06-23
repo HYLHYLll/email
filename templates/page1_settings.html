@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器设置与测试 - 本地邮件过滤器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>本地邮件过滤器</h1>
+
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <a href="{{ url_for('settings_page') }}" class="nav-active">设置与测试</a>
+            <a href="{{ url_for('emails_page') }}">查看邮件</a>
+        </nav>
+
+        <!-- Flash 消息 -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+         <!-- 同步状态与操作 -->
+        <div class="section">
+            <h2>同步状态</h2>
+            {# 根据状态显示不同颜色 #}
+            <p>后台同步任务状态:
+                <strong style="
+                    {% if sync_status == '正在运行' %}color: green;
+                    {% elif sync_status == '已停止 (需要重启应用)' or sync_status == '已停止 (异常? 检查日志)' %}color: red;
+                    {% else %}color: orange;{% endif %}
+                ">{{ sync_status }}</strong>
+            </p>
+            <p>本地数据库邮件总数: <strong>{{ db_email_count }}</strong></p>
+             {# 手动触发同步的表单 #}
+             <form action="{{ url_for('settings_page') }}" method="post" style="margin-top: 15px;">
+                 <input type="hidden" name="sync_now" value="1">
+                  {# 如果后台任务未运行或已停止，按钮可能提示用户 #}
+                 <button type="submit" {% if sync_status != '正在运行' %} title="后台任务当前未运行，点击会尝试启动一次同步任务（如果可能）。"{% endif %}>
+                     立即同步一次
+                 </button>
+                 <span style="font-size: 0.85em; color: #666; margin-left: 10px;">(在后台执行，不会阻塞页面)</span>
+             </form>
+             <p style="font-size: 0.8em; color: #888; margin-top: 5px;">
+                后台任务会定期自动同步新邮件。手动同步用于立即检查。
+             </p>
+        </div>
+
+        <!-- 准确性测试区域 -->
+        <div class="section">
+            <h2>模型准确性测试</h2>
+            {# 表单提交给 /test_accuracy #}
+            <form action="{{ url_for('test_accuracy') }}" method="post">
+                <textarea name="text_to_test" placeholder="在此粘贴邮件文本..." required></textarea><br>
+                <button type="submit">检测文本</button>
+            </form>
+            {# 从 GET 请求的 URL 参数获取测试结果 #}
+            {% if accuracy_result %} {# 确保 accuracy_result 在 context 中传递过来了 #}
+            <div class="result-box">
+                <p><strong>测试结果:</strong> {{ accuracy_result }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- 规则管理区域 -->
+        <div class="section">
+            <h2>管理过滤规则</h2>
+            <div class="rule-forms">
+                {# 添加规则表单，提交给 /update_rules #}
+                <form action="{{ url_for('update_rules') }}" method="post" class="rule-form">
+                    <input type="hidden" name="action" value="add">
+                    <input type="text" name="value" placeholder="输入发件人或关键词" required>
+                    <select name="rule_type" required>
+                        <option value="allowedSenders">允许发件人(白名单)</option>
+                        <option value="blockedSenders">阻止发件人(黑名单)</option>
+                        <option value="allowedKeywords">允许关键词(白名单)</option>
+                        <option value="blockedKeywords">阻止关键词(黑名单)</option>
+                    </select>
+                    <button type="submit">添加规则</button>
+                </form>
+
+                {# 删除规则表单，提交给 /update_rules #}
+                 <form action="{{ url_for('update_rules') }}" method="post" class="rule-form">
+                    <input type="hidden" name="action" value="remove">
+                     <input type="text" name="value" placeholder="输入要移除的规则值" required>
+                     <select name="rule_type" required>
+                        <option value="allowedSenders">从允许发件人移除</option>
+                        <option value="blockedSenders">从阻止发件人移除</option>
+                        <option value="allowedKeywords">从允许关键词移除</option>
+                        <option value="blockedKeywords">从阻止关键词移除</option>
+                     </select>
+                    <button type="submit" class="button-danger">移除规则</button>
+                </form>
+            </div>
+
+            <h3>当前规则:</h3>
+            <div class="rule-display">
+                {# 检查 rules 是否存在且不为空 #}
+                {% if rules and rules is mapping and rules|length > 0 %}
+                    {% for rule_type, rule_list in rules.items() %}
+                    <div class="rule-category">
+                        <h4>
+                            {# 显示更友好的规则类型名称 #}
+                            {% if rule_type == 'allowedSenders' %}允许发件人
+                            {% elif rule_type == 'blockedSenders' %}阻止发件人
+                            {% elif rule_type == 'allowedKeywords' %}允许关键词
+                            {% elif rule_type == 'blockedKeywords' %}阻止关键词
+                            {% else %}{{ rule_type }} {# 以防有未映射的类型 #}
+                            {% endif %}
+                            {# 安全地获取长度，检查是否是列表 #}
+                            ({{ rule_list|length if rule_list is iterable and rule_list is not string else 0 }})
+                        </h4>
+                        {# 确保 rule_list 是可迭代的非字符串 #}
+                        {% if rule_list and rule_list is iterable and rule_list is not string and rule_list|length > 0 %}
+                        <ul class="rule-list">
+                            {% for item in rule_list %}
+                                {# 对显示内容进行转义，防止 XSS #}
+                                <li>{{ item | escape }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p><i>(此类别无规则)</i></p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                 {% else %}
+                     <p>无法加载规则或当前没有任何规则。</p>
+                 {% endif %}
+             </div>
+         </div>
+    </div> {# 结束 container #}
+</body>
+</html>

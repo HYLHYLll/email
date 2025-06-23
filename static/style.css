@@ -1,0 +1,323 @@
+/* static/style.css */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 使用更现代的字体栈 */
+    margin: 0;
+    background-color: #f4f7f6; /* 稍微柔和的背景色 */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 25px auto; /* 上下边距稍大 */
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08); /* 更柔和的阴影 */
+    border-radius: 8px;
+}
+
+h1, h2, h3, h4 {
+    color: #2c3e50; /* 统一标题颜色 */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600; /* 稍粗的字重 */
+}
+
+h2 {
+    border-bottom: 2px solid #eaeaef; /* 浅灰色下划线 */
+    padding-bottom: 12px;
+    margin-top: 35px;
+    margin-bottom: 20px; /* 增加标题下的间距 */
+    font-size: 1.6em; /* 稍大字体 */
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 1.3em;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+h4 {
+    font-size: 1.1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+
+/* 导航栏 */
+.navbar {
+    background-color: #4a90e2; /* 调整为更亮的蓝色 */
+    padding: 12px 0; /* 增加垂直内边距 */
+    margin-bottom: 25px;
+    text-align: center;
+    border-radius: 6px;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 22px; /* 增加内边距 */
+    margin: 0 8px; /* 增加链接间距 */
+    border-radius: 5px;
+    transition: background-color 0.25s ease, transform 0.1s ease; /* 平滑过渡 */
+    display: inline-block; /* 防止换行问题 */
+}
+.navbar a:hover {
+    background-color: #357ABD; /* 深一点的悬停色 */
+    transform: translateY(-1px); /* 轻微上移效果 */
+}
+.navbar a.nav-active {
+    background-color: #2c3e50; /* 深色激活状态 */
+    font-weight: 600; /* 激活状态加粗 */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* 内阴影效果 */
+}
+
+
+/* Flash 消息 */
+.flash {
+    padding: 15px 20px; /* 增加内边距 */
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 500; /* 中等字重 */
+    opacity: 0.95; /* 稍微透明 */
+    border-left: 5px solid; /* 左侧边框 */
+}
+.flash.info { background-color: #5bc0de; border-color: #46b8da; }
+.flash.success { background-color: #5cb85c; border-color: #4cae4c;}
+.flash.warning { background-color: #f0ad4e; color: #333; border-color: #eea236;}
+.flash.error { background-color: #d9534f; border-color: #d43f3a;}
+
+/* 区块 (页面一) */
+.section {
+    margin-bottom: 35px; /* 增加区块间距 */
+    padding: 25px;
+    border: 1px solid #e0e0e0; /* 更浅的边框色 */
+    border-radius: 6px;
+    background-color: #fdfdfd;
+}
+
+/* 表单和按钮 */
+textarea {
+    width: calc(100% - 22px); /* 考虑 padding 和 border */
+    min-height: 90px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    line-height: 1.5;
+}
+input[type=text] {
+    padding: 10px 12px;
+    margin-right: 8px; /* 稍大间距 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 220px; /* 稍宽 */
+    font-size: 1em;
+}
+select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: white; /* 确保背景色 */
+}
+button {
+    padding: 10px 20px; /* 增加横向内边距 */
+    margin-right: 8px;
+    cursor: pointer;
+    background-color: #4a90e2; /* 匹配导航栏 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+button:hover {
+    background-color: #357ABD;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加悬停阴影 */
+}
+button.button-danger {
+    background-color: #d9534f;
+}
+button.button-danger:hover {
+    background-color: #c9302c;
+}
+
+.result-box {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background-color: #e9f5e9; /* 淡绿色背景 */
+    border: 1px solid #c8e6c9; /* 匹配的边框色 */
+    border-radius: 4px;
+}
+.result-box p { margin: 0; font-weight: 500;}
+
+/* 规则管理 (页面一) */
+.rule-forms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 表单间距 */
+    margin-bottom: 25px;
+}
+.rule-form {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    min-width: 320px; /* 最小宽度 */
+    gap: 8px; /* 表单内元素间距 */
+}
+
+.rule-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* 响应式网格 */
+    gap: 25px; /* 网格间距 */
+}
+.rule-category {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 20px; /* 增加内边距 */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 轻微阴影 */
+}
+.rule-category h4 {
+    margin-top: 0;
+    margin-bottom: 15px; /* 增加标题下间距 */
+    border-bottom: 1px solid #f0f0f0; /* 更浅的下划线 */
+    padding-bottom: 8px;
+    font-size: 1.15em; /* 稍大字体 */
+    color: #34495e; /* 深蓝灰色 */
+}
+.rule-list {
+    list-style: none;
+    padding-left: 0;
+    max-height: 200px; /* 增加最大高度 */
+    overflow-y: auto;
+    margin: 0;
+}
+.rule-list li {
+    margin-bottom: 10px; /* 增加列表项间距 */
+    padding: 8px 10px; /* 增加内边距 */
+    background-color: #f8f9fa; /* 非常浅的灰色背景 */
+    border-radius: 3px;
+    word-break: break-all;
+    font-size: 0.95em;
+    border: 1px solid #eee; /* 添加细边框 */
+}
+.rule-category p i { color: #888; font-style: normal;} /* 去掉斜体，用颜色区分 */
+
+/* 邮件页面 (页面二) */
+.email-container {
+    display: flex;
+    gap: 25px; /* 增加侧边栏和主区域间距 */
+}
+.email-sidebar {
+    flex: 0 0 220px; /* 固定宽度侧边栏 */
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    height: fit-content;
+}
+.email-sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    text-align: center;
+    color: #34495e;
+}
+.email-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.email-sidebar li a {
+    display: block;
+    padding: 12px 18px; /* 增加内边距 */
+    text-decoration: none;
+    color: #4a90e2; /* 匹配主色调 */
+    border-radius: 5px;
+    margin-bottom: 8px; /* 增加链接间距 */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+}
+.email-sidebar li a:hover {
+    background-color: #e9ecef;
+    color: #2c3e50; /* 悬停时颜色变深 */
+}
+.email-sidebar li a.active {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: 600;
+}
+
+.email-list-area {
+    flex: 1; /* 占据剩余空间 */
+}
+
+.email-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.email-item {
+    border: 1px solid #e0e0e0; /* 更浅的边框 */
+    margin-bottom: 12px; /* 增加列表项间距 */
+    border-radius: 6px;
+    background-color: #fff;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    overflow: hidden; /* 防止内容溢出圆角 */
+}
+.email-item:hover {
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* 悬停时更明显的阴影 */
+    border-color: #ccc; /* 悬停时边框加深 */
+}
+.email-item a {
+    display: block;
+    padding: 18px 20px; /* 增加内边距 */
+    text-decoration: none;
+    color: inherit;
+}
+.email-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px; /* 增加头部和主题间距 */
+    font-size: 0.9em;
+    color: #555;
+}
+.email-from {
+    font-weight: 600; /* 发件人加粗 */
+    color: #333;
+}
+.email-date { font-style: normal; color: #777; } /* 日期取消斜体，颜色变浅 */
+.email-subject {
+    font-weight: 600; /* 主题加粗 */
+    margin-bottom: 8px;
+    font-size: 1.1em; /* 稍大字体 */
+    color: #2c3e50; /* 主题颜色 */
+    white-space: nowrap; /* 防止主题换行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 超出部分显示省略号 */
+}
+.email-snippet {
+    color: #666;
+    font-size: 0.95em;
+    line-height: 1.5; /* 调整行高 */
+    margin-bottom: 5px; /* 与原因间距 */
+}
+.email-reason {
+    margin-top: 8px; /* 增加与摘要的间距 */
+    font-size: 0.9em;
+    color: #c0392b; /* 深红色表示原因 */
+    background-color: #fdf5f5; /* 非常浅的红色背景 */
+    padding: 3px 6px;
+    border-radius: 3px;
+    display: inline-block; /* 让背景适应内容 */
+}
