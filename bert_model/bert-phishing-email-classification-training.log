@@ -1,0 +1,75 @@
+[{"stream_name":"stderr","time":29.4960541,"data":"2024-06-26 12:29:05.968206: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":29.497221179,"data":"2024-06-26 12:29:05.968332: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":29.497253457,"data":"2024-06-26 12:29:06.092250: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stderr","time":29.70337107,"data":"2024-06-26 12:29:05.968206: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\n"}
+,{"stream_name":"stderr","time":29.703405647,"data":"2024-06-26 12:29:05.968332: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\n"}
+,{"stream_name":"stderr","time":29.703412337,"data":"2024-06-26 12:29:06.092250: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\n"}
+,{"stream_name":"stdout","time":41.548099161,"data":"Processing: SpamAssasin.csv\n"}
+,{"stream_name":"stdout","time":44.466462627,"data":"Processing: Nazario.csv\n"}
+,{"stream_name":"stdout","time":45.193622694,"data":"Processing: Nigerian_Fraud.csv\n"}
+,{"stream_name":"stdout","time":46.283100725,"data":"Processing: CEAS_08.csv\n"}
+,{"stream_name":"stdout","time":58.945794903,"data":"Processing: Enron.csv\n"}
+,{"stream_name":"stdout","time":68.993012956,"data":"Processing: Ling.csv\n"}
+,{"stream_name":"stdout","time":71.02710758,"data":"Creating datasets\n"}
+,{"stream_name":"stdout","time":856.547354611,"data":"Datasets created\n"}
+,{"stream_name":"stderr","time":862.822142166,"data":"Some weights of BertForSequenceClassification were not initialized from the model checkpoint at /kaggle/input/huggingface-bert/bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']\n"}
+,{"stream_name":"stderr","time":862.822173387,"data":"You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.\n"}
+,{"stream_name":"stdout","time":1205.38072604,"data":"Epoch 0, Step 500: Train Loss: 0.3449, Validation Loss: 0.1750, Accuracy: 0.9537\n"}
+,{"stream_name":"stdout","time":1546.201608331,"data":"Epoch 0, Step 1000: Train Loss: 0.1851, Validation Loss: 0.1153, Accuracy: 0.9731\n"}
+,{"stream_name":"stdout","time":1889.485829932,"data":"Epoch 0, Step 1500: Train Loss: 0.1391, Validation Loss: 0.0933, Accuracy: 0.9794\n"}
+,{"stream_name":"stdout","time":2231.26533501,"data":"Epoch 0, Step 2000: Train Loss: 0.0960, Validation Loss: 0.0928, Accuracy: 0.9819\n"}
+,{"stream_name":"stdout","time":2575.050627312,"data":"Epoch 0, Step 2500: Train Loss: 0.0868, Validation Loss: 0.1224, Accuracy: 0.9750\n"}
+,{"stream_name":"stdout","time":2916.91969885,"data":"Epoch 0, Step 3000: Train Loss: 0.1031, Validation Loss: 0.0965, Accuracy: 0.9810\n"}
+,{"stream_name":"stdout","time":3261.322271727,"data":"Epoch 0, Step 3500: Train Loss: 0.0902, Validation Loss: 0.0854, Accuracy: 0.9839\n"}
+,{"stream_name":"stdout","time":3604.105927818,"data":"Epoch 1, Step 4000: Train Loss: 0.0880, Validation Loss: 0.0838, Accuracy: 0.9839\n"}
+,{"stream_name":"stdout","time":3949.106888711,"data":"Epoch 1, Step 4500: Train Loss: 0.0675, Validation Loss: 0.0817, Accuracy: 0.9838\n"}
+,{"stream_name":"stdout","time":4291.710384129,"data":"Epoch 1, Step 5000: Train Loss: 0.0710, Validation Loss: 0.0603, Accuracy: 0.9846\n"}
+,{"stream_name":"stdout","time":4636.732946404,"data":"Epoch 1, Step 5500: Train Loss: 0.0774, Validation Loss: 0.0628, Accuracy: 0.9848\n"}
+,{"stream_name":"stdout","time":4980.368702523,"data":"Epoch 1, Step 6000: Train Loss: 0.0651, Validation Loss: 0.0812, Accuracy: 0.9837\n"}
+,{"stream_name":"stdout","time":5326.197883544,"data":"Epoch 1, Step 6500: Train Loss: 0.0622, Validation Loss: 0.0818, Accuracy: 0.9857\n"}
+,{"stream_name":"stdout","time":5670.211743431,"data":"Epoch 1, Step 7000: Train Loss: 0.0745, Validation Loss: 0.0643, Accuracy: 0.9866\n"}
+,{"stream_name":"stdout","time":6016.526638231,"data":"Epoch 1, Step 7500: Train Loss: 0.0688, Validation Loss: 0.0604, Accuracy: 0.9872\n"}
+,{"stream_name":"stdout","time":6360.596662668,"data":"Epoch 1, Step 8000: Train Loss: 0.0634, Validation Loss: 0.0690, Accuracy: 0.9882\n"}
+,{"stream_name":"stdout","time":6705.470915759,"data":"Epoch 1, Step 8500: Train Loss: 0.0361, Validation Loss: 0.0704, Accuracy: 0.9873\n"}
+,{"stream_name":"stdout","time":7048.487598119,"data":"Epoch 1, Step 9000: Train Loss: 0.0296, Validation Loss: 0.0809, Accuracy: 0.9877\n"}
+,{"stream_name":"stdout","time":7393.757490802,"data":"Epoch 1, Step 9500: Train Loss: 0.0293, Validation Loss: 0.0686, Accuracy: 0.9898\n"}
+,{"stream_name":"stdout","time":7736.744546749,"data":"Epoch 1, Step 10000: Train Loss: 0.0384, Validation Loss: 0.0977, Accuracy: 0.9848\n"}
+,{"stream_name":"stdout","time":8082.214979588,"data":"Epoch 1, Step 10500: Train Loss: 0.0185, Validation Loss: 0.1141, Accuracy: 0.9826\n"}
+,{"stream_name":"stdout","time":8425.36437084,"data":"Epoch 1, Step 11000: Train Loss: 0.0386, Validation Loss: 0.0581, Accuracy: 0.9902\n"}
+,{"stream_name":"stdout","time":8770.861208793,"data":"Epoch 1, Step 11500: Train Loss: 0.0335, Validation Loss: 0.0551, Accuracy: 0.9898\n"}
+,{"stream_name":"stdout","time":9114.022024621,"data":"Epoch 2, Step 12000: Train Loss: 0.0335, Validation Loss: 0.0672, Accuracy: 0.9888\n"}
+,{"stream_name":"stdout","time":9459.738900505,"data":"Epoch 2, Step 12500: Train Loss: 0.0364, Validation Loss: 0.0611, Accuracy: 0.9902\n"}
+,{"stream_name":"stdout","time":9802.856624279,"data":"Epoch 2, Step 13000: Train Loss: 0.0362, Validation Loss: 0.0786, Accuracy: 0.9851\n"}
+,{"stream_name":"stdout","time":10148.671938649,"data":"Epoch 2, Step 13500: Train Loss: 0.0305, Validation Loss: 0.0569, Accuracy: 0.9907\n"}
+,{"stream_name":"stdout","time":10492.088171166,"data":"Epoch 2, Step 14000: Train Loss: 0.0360, Validation Loss: 0.0483, Accuracy: 0.9916\n"}
+,{"stream_name":"stdout","time":10837.858252902,"data":"Epoch 2, Step 14500: Train Loss: 0.0268, Validation Loss: 0.0580, Accuracy: 0.9895\n"}
+,{"stream_name":"stdout","time":11181.181631576,"data":"Epoch 2, Step 15000: Train Loss: 0.0237, Validation Loss: 0.0520, Accuracy: 0.9911\n"}
+,{"stream_name":"stdout","time":11527.097672166,"data":"Epoch 2, Step 15500: Train Loss: 0.0327, Validation Loss: 0.0527, Accuracy: 0.9908\n"}
+,{"stream_name":"stdout","time":11870.621954945,"data":"Epoch 2, Step 16000: Train Loss: 0.0240, Validation Loss: 0.0587, Accuracy: 0.9903\n"}
+,{"stream_name":"stdout","time":12219.764743521,"data":"Epoch 2, Step 16500: Train Loss: 0.0093, Validation Loss: 0.0548, Accuracy: 0.9917\n"}
+,{"stream_name":"stdout","time":12566.497518992,"data":"Epoch 2, Step 17000: Train Loss: 0.0088, Validation Loss: 0.0591, Accuracy: 0.9911\n"}
+,{"stream_name":"stdout","time":12915.486071231,"data":"Epoch 2, Step 17500: Train Loss: 0.0100, Validation Loss: 0.0564, Accuracy: 0.9913\n"}
+,{"stream_name":"stdout","time":13262.052167617,"data":"Epoch 2, Step 18000: Train Loss: 0.0079, Validation Loss: 0.0618, Accuracy: 0.9911\n"}
+,{"stream_name":"stdout","time":13610.726625446,"data":"Epoch 2, Step 18500: Train Loss: 0.0088, Validation Loss: 0.0629, Accuracy: 0.9912\n"}
+,{"stream_name":"stdout","time":13957.573300097,"data":"Epoch 2, Step 19000: Train Loss: 0.0100, Validation Loss: 0.0616, Accuracy: 0.9915\n"}
+,{"stream_name":"stdout","time":14306.331404844,"data":"Epoch 2, Step 19500: Train Loss: 0.0163, Validation Loss: 0.0597, Accuracy: 0.9908\n"}
+,{"stream_name":"stdout","time":14653.157320963,"data":"Epoch 3, Step 20000: Train Loss: 0.0088, Validation Loss: 0.0699, Accuracy: 0.9906\n"}
+,{"stream_name":"stdout","time":15002.211952981,"data":"Epoch 3, Step 20500: Train Loss: 0.0118, Validation Loss: 0.0603, Accuracy: 0.9911\n"}
+,{"stream_name":"stdout","time":15348.825664709,"data":"Epoch 3, Step 21000: Train Loss: 0.0127, Validation Loss: 0.0629, Accuracy: 0.9906\n"}
+,{"stream_name":"stdout","time":15697.654359189,"data":"Epoch 3, Step 21500: Train Loss: 0.0102, Validation Loss: 0.0594, Accuracy: 0.9912\n"}
+,{"stream_name":"stdout","time":16044.244221815,"data":"Epoch 3, Step 22000: Train Loss: 0.0054, Validation Loss: 0.0593, Accuracy: 0.9920\n"}
+,{"stream_name":"stdout","time":16393.184525226,"data":"Epoch 3, Step 22500: Train Loss: 0.0198, Validation Loss: 0.0481, Accuracy: 0.9921\n"}
+,{"stream_name":"stdout","time":16739.702102703,"data":"Epoch 3, Step 23000: Train Loss: 0.0099, Validation Loss: 0.0530, Accuracy: 0.9918\n"}
+,{"stream_name":"stdout","time":17088.048362968,"data":"Epoch 3, Step 23500: Train Loss: 0.0046, Validation Loss: 0.0531, Accuracy: 0.9917\n"}
+,{"stream_name":"stdout","time":17390.960682549,"data":"{'eval_loss': 0.04379519820213318, 'eval_accuracy': 0.9919658548832538, 'eval_roc_auc': 0.9994352548669022, 'eval_runtime': 131.1225, 'eval_samples_per_second': 60.752, 'eval_steps_per_second': 3.798, 'epoch': 3.0}\n"}
+,{"stream_name":"stderr","time":17395.87977948,"data":"/opt/conda/lib/python3.10/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"remove_papermill_header.RemovePapermillHeader\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":17395.879833721,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":17395.887295537,"data":"[NbConvertApp] WARNING | Config option `kernel_spec_manager_class` not recognized by `NbConvertApp`.\n"}
+,{"stream_name":"stderr","time":17395.914950875,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":17396.333701347,"data":"[NbConvertApp] Writing 58336 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":17397.912473181,"data":"/opt/conda/lib/python3.10/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"nbconvert.preprocessors.ExtractOutputPreprocessor\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":17397.912548039,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":17397.915318732,"data":"[NbConvertApp] WARNING | Config option `kernel_spec_manager_class` not recognized by `NbConvertApp`.\n"}
+,{"stream_name":"stderr","time":17397.946538806,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":17398.893869036,"data":"[NbConvertApp] Writing 348711 bytes to __results__.html\n"}
+]

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>查看邮件: {{ email.subject | default('无主题', true) }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* 为查看页面添加一些简单样式 */
+        body { background-color: #fff; margin: 0; padding: 0; font-family: sans-serif; } /* 添加默认字体 */
+        .email-view-container { max-width: 900px; margin: 20px auto; padding: 25px; border: 1px solid #ddd; background-color: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.1); border-radius: 8px;} /* 调整样式 */
+        .email-view-header { border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; } /* 调整间距 */
+        .email-view-header h2 { margin: 0 0 12px 0; font-size: 1.5em; color: #222; line-height: 1.3;} /* 调整标题样式 */
+        .email-view-header p { margin: 5px 0; color: #444; font-size: 0.9em; } /* 调整元信息样式 */
+        .email-view-header p strong { color: #111; margin-right: 5px;} /* 调整 strong 样式 */
+        .email-view-body { margin-top: 20px; line-height: 1.7; /* 增加行高 */ background-color: #fff; padding: 10px 0; /* 移除内边距和边框，让内容自然流动 */ overflow-x: auto; /* 处理过宽内容 */ font-size: 1rem; /* 标准字体大小 */ color: #333; } /* 默认文本颜色 */
+        /* 确保纯文本也能换行显示 */
+        .email-view-body pre { white-space: pre-wrap; word-wrap: break-word; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; /* 等宽字体 */ font-size: 0.95em; background-color: #f8f8f8; padding: 15px; border: 1px solid #eee; border-radius: 4px; }
+        .flash.error { margin-bottom: 15px; background-color: #f8d7da; color: #721c24; border-color: #f5c6cb;} /* 错误消息样式 */
+        /* 简单处理 HTML 邮件中的常见元素 */
+        .email-view-body a { color: #007bff; text-decoration: none; }
+        .email-view-body a:hover { text-decoration: underline; }
+        .email-view-body img { max-width: 100%; height: auto; } /* 图片自适应 */
+        .email-view-body blockquote { border-left: 3px solid #ccc; padding-left: 15px; margin-left: 0; color: #666; }
+        .email-view-body hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="email-view-container">
+        {% if email.error %}
+            <div class="flash error"><strong>错误:</strong> {{ email.error }}</div>
+        {% endif %}
+
+        <div class="email-view-header">
+            <h2>{{ email.subject | default('(无主题)', true) }}</h2> {# 使用括号区分默认值 #}
+            {# 使用 safe 过滤器解码可能存在的 MIME 编码头 (已在后端处理，这里可选) #}
+            <p><strong>发件人:</strong> {{ email.sender }}</p>
+            <p><strong>收件人:</strong> {{ email.recipient | default('未知', true) }}</p> {# 确保后端传递了这个信息 #}
+            <p><strong>日期:</strong> {{ email.date | default('未知', true) }}</p>
+             {# 可以选择性显示其他信息，如本地分类等 #}
+             {% if email.local_category %}
+             <p><strong>本地分类:</strong> {{ email.local_category }}
+                 {% if email.custom_rule_reason %} (原因: {{ email.custom_rule_reason }})
+                 {% elif email.local_category == 'ModelSpam' and email.model_prediction %} (模型: {{ email.model_prediction }}
+                     {% if email.model_prob_normal is not none and email.model_prob_spam is not none %}
+                         P(N)={{ "%.2f"|format(email.model_prob_normal) }}, P(S)={{ "%.2f"|format(email.model_prob_spam) }}
+                     {% endif %})
+                 {% endif %}
+             </p>
+             {% endif %}
+        </div>
+
+        <div class="email-view-body">
+            {#
+               安全警告：使用 |safe 过滤器需要非常小心！
+               只有在你完全信任邮件的 HTML 来源，或者你已经对其进行了充分的清理时才能使用。
+               直接渲染来自邮件的原始 HTML 可能导致跨站脚本攻击 (XSS)。
+               强烈建议使用像 Bleach 这样的库来清理 HTML 后再渲染。
+               如果你确定邮件源是内部或可信的，可以保留 |safe。
+               如果邮件来自外部，强烈建议移除 |safe 或使用 Bleach 清理。
+               例如 (需要安装 bleach):
+               {% import bleach %}
+               {{ bleach.clean(email.body, tags=['p', 'br', 'a', 'strong', 'em', 'ul', 'ol', 'li', 'img'], attributes={'a': ['href', 'title'], 'img': ['src', 'alt', 'width', 'height']}) | safe }}
+            #}
+            {% if email.body %}
+                {# 假设 email.body 包含的是 HTML #}
+                {{ email.body | safe }}
+            {% elif email.error %}
+                 <p><i>无法加载邮件内容。</i></p>
+            {% else %}
+                 <p><i>[邮件正文为空]</i></p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

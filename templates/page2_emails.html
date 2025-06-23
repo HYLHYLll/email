@@ -1,0 +1,81 @@
+<!-- page2_emails.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }} - 本地邮件过滤器</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>本地邮件过滤器</h1>
+
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <a href="{{ url_for('settings_page') }}">设置与测试</a>
+            <a href="{{ url_for('emails_page') }}" class="nav-active">查看邮件</a>
+        </nav>
+
+        <!-- Flash 消息 -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+         <div class="email-container">
+            <!-- 侧边栏 (修改链接文本以包含计数) -->
+            <aside class="email-sidebar">
+                <h2>邮件分类</h2>
+                <ul>
+                    {# 使用 category_counts 字典中的值，.get(key, 0) 确保即使键不存在也显示 0 #}
+                    <li><a href="{{ url_for('emails_page', category='inbox') }}" class="{{ 'active' if current_category == 'inbox' }}">收件箱 ({{ category_counts.get('inbox', 0) }})</a></li>
+                    <li><a href="{{ url_for('emails_page', category='read') }}" class="{{ 'active' if current_category == 'read' }}">已读邮件 ({{ category_counts.get('read', 0) }})</a></li>
+                    <li><a href="{{ url_for('emails_page', category='unread') }}" class="{{ 'active' if current_category == 'unread' }}">未读邮件 ({{ category_counts.get('unread', 0) }})</a></li>
+                    <li><a href="{{ url_for('emails_page', category='spam') }}" class="{{ 'active' if current_category == 'spam' }}">垃圾邮件 (Gmail 标记) ({{ category_counts.get('spam', 0) }})</a></li>
+                    <li><a href="{{ url_for('emails_page', category='custom') }}" class="{{ 'active' if current_category == 'custom' }}">自定义规则屏蔽 ({{ category_counts.get('custom', 0) }})</a></li>
+                    <li><a href="{{ url_for('emails_page', category='model_spam') }}" class="{{ 'active' if current_category == 'model_spam' }}">模型识别垃圾邮件 ({{ category_counts.get('model_spam', 0) }})</a></li>
+                </ul>
+            </aside>
+
+            <!-- 主要邮件列表区域 (保持不变) -->
+            <main class="email-list-area">
+                <h2>{{ page_title }}</h2>
+                {# 显示错误信息 #}
+                {% if error_message %}
+                    <div class="flash error">{{ error_message }}</div>
+                {% endif %}
+                {# 显示邮件列表 #}
+                {% if emails %}
+                    <ul class="email-list">
+                        {% for email in emails %}
+                        <li class="email-item">
+                            <a href="{{ url_for('view_email', message_id=email.message_id) }}" target="_blank">
+                                <div class="email-header">
+                                    {# 注意：模板中使用了 email.from，但数据库查询返回的是 "from"，需要确保一致性 #}
+                                    {# 如果数据库返回 'from'，这里应该用 email['from'] 或确保 Row 对象能处理 #}
+                                    {# 为了安全，我们在 database.py 的查询中明确选择了 "from" 列 #}
+                                     <span><strong>发件人:</strong> {{ email.sender | default('(无发件人)') | truncate(50) }}</span>
+                                     {# 实际显示的 from 字段可能与 sender 字段重复或不同，根据需要显示 #}
+                                     {# <span class="email-from">{{ email['from'] | default('') | truncate(50) }}</span> #}
+                                     <span class="email-date">{{ email.date }}</span>
+                                </div>
+                                <div class="email-subject">{{ email.subject | default('无主题', true) }}</div>
+                                <div class="email-snippet">{{ email.snippet | truncate(100) }}</div>
+                                {% if email.reason %}
+                                <div class="email-reason"><em>原因: {{ email.reason }}</em></div>
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% elif not error_message %}
+                    <p>此分类下没有邮件。</p>
+                {% endif %}
+            </main>
+        </div> {# 结束 email-container #}
+    </div> {# 结束 container #}
+</body>
+</html>
